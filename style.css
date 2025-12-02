@@ -210,7 +210,7 @@ h2 {
 
 .promo-caption { padding: 20px; text-align: left; background-color: #111; }
 .promo-caption h3 {
-    font-family: 'ZTBrosOskon90s', serif; font-size: 20px; color: #fff;
+    font-family: 'ZTBrosOskon90s', serif; font-size: 24px; color: #fff;
     margin-bottom: 5px; letter-spacing: -0.5px;
     text-transform: uppercase; font-weight: normal;
 }
@@ -348,4 +348,55 @@ h2 {
     
     .menu-embed-container iframe { height: 450px !important; }
     .footer-content { flex-direction: column; gap: 20px; }
+}
+
+.packages-area {
+    margin-top: 50px;
+    border-top: 1px solid #eee; /* Garis pemisah tipis */
+    padding-top: 60px;
+}
+
+.packages-grid {
+    display: grid;
+    /* Grid 4 Kolom di Desktop (Sejajar semua) */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.btn-package {
+    display: block;
+    padding: 20px 10px;
+    border: 1px solid #000;
+    color: #000;
+    text-decoration: none;
+    font-family: 'Mluvka', sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+/* Efek Hover: Jadi Hitam, Tulisannya Putih */
+.btn-package:hover {
+    background-color: #000;
+    color: #fff;
+    transform: translateY(-3px); /* Naik sedikit */
+}
+
+.download-icon {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+/* RESPONSIF HP */
+@media (max-width: 768px) {
+    .packages-grid {
+        /* Di HP jadi 2 kolom (2x2) agar tombol tidak kekecilan */
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 15px;
+    }
 }
