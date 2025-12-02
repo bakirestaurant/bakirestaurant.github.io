@@ -1,0 +1,707 @@
+html {
+    scroll-behavior: smooth; /* Efek scroll halus */
+}
+
+/* --- 1. SETUP FONT LOKAL (MLUVKA) --- */
+@font-face {
+    font-family: 'Mluvka';
+    src: url('fonts/Mluvka-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- 2. RESET & GLOBAL --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Mluvka', sans-serif;
+    color: #111;
+    background-color: #000;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Utility Class */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.bg-white {
+    background-color: #fff;
+    color: #111;
+}
+
+.section-padding {
+    padding: 100px 0;
+}
+
+/* --- 3. NAVBAR (HAMBURGER STYLE) --- */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 1000;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    transition: 0.3s;
+}
+
+.nav-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+    display: block;
+    /* Invert logo jika perlu, sesuaikan dengan file asli Anda */
+    /* filter: brightness(1.2); */ 
+}
+
+/* STYLING TOMBOL HAMBURGER */
+.hamburger {
+    display: cursor;
+    cursor: pointer;
+    z-index: 2000; /* Harus lebih tinggi dari menu yang muncul */
+    padding: 10px;
+}
+
+.hamburger .bar {
+    display: block;
+    width: 30px; /* Lebar garis */
+    height: 2px; /* Tebal garis */
+    background-color: #fff;
+    margin: 6px 0; /* Jarak antar garis */
+    transition: 0.4s;
+}
+
+/* Animasi Tombol Hamburger jadi X saat aktif */
+.hamburger.active .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-6px, 6px);
+}
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0; /* Garis tengah hilang */
+}
+.hamburger.active .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-6px, -6px);
+}
+
+/* STYLING MENU (OFF-CANVAS / TERSEMBUNYI) */
+.nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Sembunyi di kanan layar */
+    width: 100%;  /* Full Screen di HP */
+    height: 100vh; /* Full Tinggi */
+    background-color: rgba(0, 0, 0, 0.95); /* Hitam Transparan Elegan */
+    
+    display: flex;
+    flex-direction: column; /* Susun ke bawah */
+    justify-content: center; /* Tengah secara vertikal */
+    align-items: center; /* Tengah secara horizontal */
+    
+    list-style: none;
+    transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1); /* Animasi slide halus */
+    z-index: 1500;
+}
+
+/* Desktop: Menu lebarnya cuma setengah layar biar estetik */
+@media (min-width: 769px) {
+    .nav-links {
+        width: 400px; /* Lebar menu di desktop */
+        border-left: 1px solid rgba(255,255,255,0.1);
+    }
+}
+
+/* Saat class active ditambahkan via JS, menu muncul */
+.nav-links.active {
+    right: 0;
+}
+
+/* Link di dalam menu */
+.nav-links li {
+    margin: 20px 0;
+    opacity: 0; /* Efek muncul pelan-pelan */
+    transform: translateY(20px);
+    transition: 0.5s;
+}
+
+/* Animasi link muncul satu per satu */
+.nav-links.active li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 24px; /* Font besar */
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #888;
+}
+
+/* Tombol Close (X) Manual di dalam menu (Opsional) */
+.close-btn {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #fff;
+    display: none; /* Kita sembunyikan karena tombol hamburger sudah jadi X */
+}
+
+/* Tombol Reservasi Khusus di Menu */
+.btn-book-menu {
+    border: 1px solid #fff;
+    padding: 15px 40px;
+    margin-top: 20px;
+    display: inline-block;
+    font-size: 14px !important;
+}
+
+.btn-book-menu:hover {
+    background: #fff;
+    color: #000 !important;
+}
+
+/* Sembunyikan tombol 'RESERVASI' yang ada di navbar lama */
+.btn-book {
+    display: none; 
+}
+
+/* LOGO IMAGE STYLING */
+.logo a {
+    display: block; /* Agar area klik pas */
+}
+
+.logo img {
+    height: 50px; /* Tinggi logo. Sesuaikan jika terlalu besar/kecil (misal: 40px atau 60px) */
+    width: auto;
+    display: block;
+    /* Opsional: Jika logo putihnya kurang terang, bisa tambah brightness */
+    filter: brightness(1.2); 
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: opacity 0.3s;
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
+}
+
+.btn-book {
+    padding: 10px 25px;
+    border: 1px solid #fff;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-book:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* --- 4. HERO SECTION --- */
+.hero {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    
+    /* BACKGROUND IMAGE (Baki BG Asli) */
+    background-image: url('images/bakiBG.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Overlay Hitam (Supaya teks putih terbaca di atas foto gedung) */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.4); /* Gelapkan foto sebesar 40% */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-subtitle {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    opacity: 0.9;
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero p {
+    font-size: 16px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.btn-hero {
+    display: inline-block;
+    padding: 15px 40px;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-hero:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* --- 5. CONTENT SECTION (Split Layout) --- */
+.split-layout {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.text-block, .image-block {
+    flex: 1;
+}
+
+.section-tag {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #666;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.text-block h2 {
+    font-size: 36px;
+    line-height: 1.2;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.text-block p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: #444;
+    margin-bottom: 20px;
+}
+
+.link-arrow {
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #000;
+    padding-bottom: 4px;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.image-block img {
+    width: 100%;
+    display: block;
+    box-shadow: 15px 15px 0 rgba(0,0,0,0.05);
+}
+
+/* --- 6. RESPONSIVE (HP) --- */
+@media (max-width: 768px) {
+    .nav-links { display: none; } /* Nanti kita buat menu burger */
+    
+    .logo img { height: 40px; } /* Logo lebih kecil di HP */
+    
+    .hero h1 { font-size: 32px; }
+    
+    .split-layout {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+/* --- FASE 3: HIGHLIGHT SECTION (Dark) --- */
+
+.bg-black {
+    background-color: #0c0c0c; /* Hitam pekat tapi tidak mati (#000) */
+    color: #fff;
+}
+
+.center-text {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-tag-white {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #aaa; /* Abu-abu terang */
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.bg-black h2 {
+    font-size: 36px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+/* GRID SYSTEM */
+.grid-3 {
+    display: grid;
+    /* Membuat 3 kolom otomatis */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 40px; /* Jarak antar kotak */
+}
+
+/* CARD STYLING */
+.card-menu {
+    text-align: center;
+    cursor: pointer;
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Memaksa gambar jadi KOTAK PERSEGI (Square) */
+    overflow: hidden; /* Memotong gambar yang kelebihan */
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Gambar mengisi kotak tanpa gepeng */
+    transition: transform 0.6s ease; /* Animasi halus saat zoom */
+    filter: grayscale(100%); /* Efek Hitam Putih ala Yuki */
+}
+
+/* Efek saat mouse diarahkan ke kotak (Hover) */
+.card-menu:hover .card-image img {
+    transform: scale(1.1); /* Zoom in sedikit */
+    filter: grayscale(0%); /* Kembali berwarna */
+}
+
+.card-menu h3 {
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.card-menu p {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.6;
+    padding: 0 10px;
+}
+
+/* TOMBOL OUTLINE PUTIH */
+.mt-50 {
+    margin-top: 60px;
+}
+
+.btn-outline-white {
+    display: inline-block;
+    border: 1px solid #fff;
+    padding: 15px 40px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-outline-white:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* RESPONSIVE GRID (HP) */
+@media (max-width: 768px) {
+    .grid-3 {
+        grid-template-columns: 1fr; /* Jadi 1 kolom di HP */
+        gap: 60px;
+    }
+    
+    .card-image {
+        aspect-ratio: 4 / 3; /* Di HP agak persegi panjang biar enak dilihat */
+    }
+}
+/* --- FASE 4: FOOTER SECTION --- */
+
+.footer-section {
+    background-color: #fff; /* Background Putih */
+    color: #000; /* Teks Hitam */
+    padding: 80px 0 30px;
+    border-top: 1px solid #eee; /* Garis tipis pemisah */
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap; /* Agar responsif turun ke bawah */
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+
+.footer-col {
+    flex: 1; /* Lebar kolom rata */
+    min-width: 200px; /* Minimal lebar agar tidak gepeng di HP */
+    margin-bottom: 30px;
+    padding-right: 20px;
+}
+
+/* KHUSUS LOGO DI FOOTER */
+.footer-logo {
+    height: 40px;
+    width: auto;
+    margin-bottom: 20px;
+    /* TRIK: Membalik warna logo Putih menjadi Hitam secara koding */
+    filter: invert(1) brightness(0); 
+}
+
+.footer-tagline {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+}
+
+.footer-col h3 {
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #888;
+}
+
+.footer-col p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #111;
+}
+
+.footer-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #000;
+    text-decoration: none;
+    border-bottom: 1px solid #000;
+}
+
+/* Social Media Links Vertical */
+.social-links a {
+    display: block; /* Turun ke bawah */
+    text-decoration: none;
+    color: #111;
+    font-size: 13px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: #888;
+    padding-left: 5px; /* Efek geser sedikit saat hover */
+}
+
+/* COPYRIGHT */
+.copyright {
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+    text-align: center;
+    font-size: 11px;
+    color: #888;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* RESPONSIVE FOOTER (HP) */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Tumpuk ke bawah */
+        gap: 20px;
+    }
+    
+    .footer-col {
+        padding-right: 0;
+    }
+}
+/* --- NEW SECTIONS CSS --- */
+
+/* 1. Special Event Banner */
+.special-event-banner {
+    position: relative;
+    margin-top: 30px;
+    width: 100%;
+    /* Batasi tinggi banner agar tidak terlalu panjang */
+    max-height: 500px; 
+    overflow: hidden;
+}
+
+.special-event-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7; /* Gelapkan dikit agar tulisan terbaca */
+    transition: 0.5s;
+}
+
+.special-event-banner:hover img {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.event-info {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    text-align: left;
+    color: #fff;
+    z-index: 2;
+}
+
+.event-info h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* Link Arrow versi Putih (untuk background hitam) */
+.link-arrow-white {
+    display: inline-block;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 4px;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 2. Menu Buttons Section */
+.menu-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.btn-box-black {
+    background: #000;
+    color: #fff;
+    padding: 20px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+    border: 1px solid #000;
+    transition: 0.3s;
+}
+
+.btn-box-outline {
+    background: transparent;
+    color: #000;
+    padding: 20px 40px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+    border: 1px solid #000;
+    transition: 0.3s;
+}
+
+.btn-box-black:hover {
+    background: #333;
+}
+.btn-box-outline:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* 3. Press / Featured Section */
+.press-logos {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.press-item {
+    font-size: 18px;
+    font-weight: bold;
+    color: #ccc; /* Abu-abu biar tidak terlalu mencolok */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: 'Times New Roman', serif; /* Font serif biar kesan "koran/majalah" */
+}
+
+/* Responsive Update */
+@media (max-width: 768px) {
+    .menu-buttons {
+        flex-direction: column; /* Tombol menu tumpuk di HP */
+        gap: 15px;
+    }
+    
+    .reverse-mobile {
+        flex-direction: column-reverse; /* Agar gambar tetap di atas teks di HP */
+    }
+}
