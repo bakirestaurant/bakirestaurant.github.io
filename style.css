@@ -705,3 +705,15 @@ body {
         flex-direction: column-reverse; /* Agar gambar tetap di atas teks di HP */
     }
 }
+/* Styling Khusus Iframe Menu */
+.menu-embed-container iframe {
+    border-radius: 8px; /* Sedikit lengkungan di sudut biar manis */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Efek bayangan */
+}
+
+/* Di HP, tinggi iframe kita kurangi sedikit agar user mudah scroll */
+@media (max-width: 768px) {
+    .menu-embed-container iframe {
+        height: 450px !important;
+    }
+}
