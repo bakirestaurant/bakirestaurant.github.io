@@ -4,7 +4,7 @@
 
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]() 
 
-Copyright 2025 Mushthafa Kamil aka whitefox9000 / Kamildotmus / Kdm
+Copyright 2025 whitefox9000 / Kamildotmus / Kdm
 
 ## 📋 Selayang Pandang
 
