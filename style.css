@@ -307,7 +307,7 @@ h2 {
 .social-links a { display: block; margin-bottom: 10px; text-decoration: none; letter-spacing: 1px; }
 .copyright {
     border-top: 1px solid #eee; padding-top: 30px;
-    text-align: center; font-size: 11px; color: #888; text-transform: uppercase;
+    text-align: center; font-size: 11px; color: #888; text-transform: none;
 }
 
 /* =========================================
